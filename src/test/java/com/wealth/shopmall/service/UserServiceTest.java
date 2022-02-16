@@ -29,5 +29,52 @@ public class UserServiceTest {
         }
     }
 
+    @Test
+    public void login() {
+        try {
+            String name="麻蛋";
+            String password = "123456";
+            User u = service.login(name,password);
+            System.out.println("登录成功=="+u.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
+    @Test
+    public void changePwd(){
+        try {
+            service.changePassword(6,"admin","1234567","987456");
+            System.out.println("密码修改成功");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void getUserById(){
+        try {
+            User user = service.getUserById(6);
+            System.out.println("用户信息=="+user.toString());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void changeInfo(){
+        try {
+            Integer uid = 8;
+            String username ="麻蛋";
+
+            User user =new User();
+            user.setPhone("13574125698");
+            user.setEmail("123456@163.com");
+            user.setGender(0);
+            service.changeInfo(uid,username,user);
+            System.out.println("用户信息修改成");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

@@ -20,19 +20,53 @@
     <!--id属性：表示映射的接口中方法的名称，直接在标签内部书写SQL语句-->
     <!--useGeneratedKeys属性：表示开启某个字段低则-->
     <!--keyProperty属性：表示将表中的那个字段作为主键进行递增-->
-    <insert id="register"  useGeneratedKeys="true" keyProperty="uid">
+    <insert id="register" useGeneratedKeys="true" keyProperty="uid">
         INSERT INTO s_user(username, password, salt, phone, email, gender, avatar,
                            is_delete, created_user, created_time, modified_user, modified_time)
-        VALUES (
-                   #{username}, #{password}, #{salt}, #{phone}, #{email}, #{gender}, #{avatar},
-                   #{isDelete}, #{createdUser}, #{createdTime}, #{modifiedUser}, #{modifiedTime}
-               )
+        VALUES (#{username}, #{password}, #{salt}, #{phone}, #{email}, #{gender}, #{avatar},
+                #{isDelete}, #{createdUser}, #{createdTime}, #{modifiedUser}, #{modifiedTime})
     </insert>
 
     <!--SELECT语句在执行的时候，查询的结果是一个对象或者多个对象-->
     <!--resultType:表示查询的结果类型，只需要指定对呀映射类型，完整包结构-->
     <!--resultMap：表的资源和类的对象属性字段名称不一致时，用这个-->
     <select id="queryUserByName" parameterType="String" resultMap="user">
-        SELECT  * from s_user where username=#{username}
+        SELECT *
+        from s_user
+        where username = #{username}
     </select>
+
+    <select id="login" resultMap="user">
+        SELECT *
+        FROM s_user
+        where username = #{username}
+    </select>
+
+    <update id="updatePasswordByUid">
+        update s_user
+        set password     = #{password},
+            modified_user=#{modifiedUser},
+            modified_time=#{modifiedTime}
+        where uid = ${uid}
+
+    </update>
+
+    <select id="findUserByUid" resultMap="user">
+        select *
+        from s_user
+        where uid = #{uid}
+    </select>
+
+    <update id="updateUserInfoById">
+        UPDATE s_user
+        SET
+        <!-- if表示条件判断标签，test接收的是一个返回值为Boolean类型的条件，如果test返回的结果是true
+        则执行if标签内的语句-->
+        <if test="phone!=null">phone = #{phone},</if>
+        <if test="email!=null">email=#{email},</if>
+        <if test="gender!=null">gender=#{gender},</if>
+        modified_user=#{modifiedUser},
+        modified_time=#{modifiedTime}
+        WHERE uid = #{uid}
+    </update>
 </mapper>
