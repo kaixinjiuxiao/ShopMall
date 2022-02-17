@@ -1,6 +1,7 @@
 package com.wealth.shopmall.controller;
 
 import com.wealth.shopmall.Utils.HttpResult;
+import com.wealth.shopmall.controller.ex.*;
 import com.wealth.shopmall.service.ex.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,7 +25,7 @@ public class BaseController {
      *
      * @return
      */
-    @ExceptionHandler(ServiceException.class)//用于统一处理抛出的异常
+    @ExceptionHandler({ServiceException.class,FileUploadException.class})//用于统一处理抛出的异常
     public HttpResult<Void> handleException(Throwable e) {
         HttpResult<Void> result = new HttpResult<>(e);
         if (e instanceof UserNameRepeatException) {
@@ -42,6 +43,24 @@ public class BaseController {
         } else if(e instanceof UpdateException){
             result.setCode(1002);
             result.setMessage("数据库更新异常");
+        }else if(e instanceof FileEmptyException){
+            result.setCode(6000);
+            result.setMessage("文件为空");
+        }else if(e instanceof FileSizeException){
+            result.setCode(6001);
+            result.setMessage("文件大小超过限制");
+        }else if(e instanceof FileTypeException){
+            result.setCode(6002);
+            result.setMessage("文件类型错误");
+        }else if(e instanceof FileStateException){
+            result.setCode(6003);
+            result.setMessage("文件状态错误");
+        }else if(e instanceof FileUploadIOException){
+            result.setCode(6004);
+            result.setMessage("文件读写异常");
+        }else if(e instanceof AddressCountLimitException){
+            result.setCode(4001);
+            result.setMessage("用户收获地址超出限制");
         }
         return result;
     }

@@ -6,9 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Date;
 
 /**
- *
+ *用户模块持久层
  */
-/*用户模块持久层*/
 public interface UserMapper {
 
     /**
@@ -62,8 +61,23 @@ public interface UserMapper {
 
     /**
      * 修改用户信息
+     *
      * @param user 用户
      * @return
      */
     Integer updateUserInfoById(User user);
+
+    /**
+     * 修改用户头像
+     *
+     * @param uid 用户ID
+     * @param avatar 头像地址
+     * @param modifiedUser 用户
+     * @param modifiedTime 修改时间
+     * @return
+     */
+    Integer updateUserAvatarById(@Param("uid") Integer uid,
+                                 @Param("avatar") String avatar,
+                                 @Param("modifiedUser") String modifiedUser,
+                                 @Param("modifiedTime") Date modifiedTime);
 }

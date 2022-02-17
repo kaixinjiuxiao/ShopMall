@@ -69,4 +69,15 @@
         modified_time=#{modifiedTime}
         WHERE uid = #{uid}
     </update>
+
+    <update id="updateUserAvatarById">
+        UPDATE s_user
+        SET
+        <!-- if表示条件判断标签，test接收的是一个返回值为Boolean类型的条件，如果test返回的结果是true
+        则执行if标签内的语句-->
+        avatar = #{avatar},
+        modified_user=#{modifiedUser},
+        modified_time=#{modifiedTime}
+        WHERE uid = #{uid}
+    </update>
 </mapper>

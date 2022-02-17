@@ -19,8 +19,8 @@
 		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
 		<link rel="stylesheet" type="text/css" href="../css/top.css" />
 		<link rel="stylesheet" type="text/css" href="../css/footer.css" />
-		<script type="text/javascript" src="../js/distpicker.data.js"></script>
-		<script type="text/javascript" src="../js/distpicker.js"></script>
+<!--		<script type="text/javascript" src="../js/distpicker.data.js"></script>-->
+<!--		<script type="text/javascript" src="../js/distpicker.js"></script>-->
 	</head>
 
 	<body>
@@ -287,6 +287,27 @@
 			</div>
 		</footer>
 		<!--页脚结束-->
+	<script type="text/javascript">
+		$("#btn-add-new-address").click(function () {
+			$.ajax({
+				url:"/address/add_new_address",
+				type:"POST",
+				dataType:"JSON",
+				data:$("#form-add-new-address").serialize(),
+				success:function (json) {
+					if(json.code==200){
+						alert("增加成功");
+						location.href="address.html";
+					}else{
+						alert(json.message);
+					}
+				},
+				error:function (xhr) {
+					alert("未知错误："+xhr.status);
+				}
+			})
+		})
+	</script>
 	</body>
 
 </html>

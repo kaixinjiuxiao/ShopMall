@@ -122,6 +122,16 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
+    @Override
+    public void updateAvatar(Integer uid, String avatar, String username) {
+        User result = mapper.findUserByUid(uid);
+        checkUserExits(result);
+        Integer rows = mapper.updateUserAvatarById(uid,avatar,username,new Date());
+        if(rows!=1){
+            throw new UpdateException("更新数据失败，请联系管理员");
+        }
+    }
+
     /**
      * 获取加密密码
      *

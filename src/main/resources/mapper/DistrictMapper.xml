@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace属性：用于指定当前的映射文件和哪个接口进行映射，需要指定接口的文件路径-->
+<mapper namespace="com.wealth.shopmall.mapper.DistrictMapper">
+
+    <!--自定义映射规则：resultMap标签来完成映射的定义-->
+    <!---->
+    <resultMap id="district" type="com.wealth.shopmall.entity.District">
+        <id column="id" property="id"></id>
+        <result column="created_user" property="createdUser"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="modified_user" property="modifiedUser"></result>
+        <result column="modified_time" property="modifiedTime"></result>
+    </resultMap>
+
+
+   <select id="getDistrictByParent" resultMap="district">
+       select * from t_dict_district where parent=#{parent} ORDER BY code desc
+   </select>
+
+</mapper>

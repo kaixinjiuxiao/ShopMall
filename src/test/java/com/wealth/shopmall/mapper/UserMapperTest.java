@@ -58,4 +58,11 @@ public class UserMapperTest {
         mapper.updateUserInfoById(user);
 
     }
+
+    @Test
+    public void updateAvatar(){
+        String url="static/images/index/user.jpg";
+        mapper.updateUserAvatarById(6,url,"管理员",new Date());
+
+    }
 }
