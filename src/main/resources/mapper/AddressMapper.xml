@@ -47,4 +47,22 @@
         where uid = #{uid}
     </select>
 
+    <select id="getAllAddress" resultMap="address">
+        select * from s_address where uid=#{uid} order by is_default desc,create_time desc;
+    </select>
+
+    <select id="getAddressById" resultMap="address">
+        select * from s_address where aid=#{aid}
+    </select>
+
+    <update id="setNoneDefault">
+        update s_address set is_default =0 where uid=#{uid}
+    </update>
+
+    <update id="setDefault">
+        update s_address set is_default =1 ,
+                             modified_user=#{modifiedUser},
+                             modified_time=#{modifiedTime}
+        where aid=#{aid}
+    </update>
 </mapper>

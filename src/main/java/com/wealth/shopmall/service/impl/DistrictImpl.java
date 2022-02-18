@@ -36,4 +36,9 @@ public class DistrictImpl implements IDistrictService {
         }
         return list;
     }
+
+    @Override
+    public String getNameByCode(String code) {
+        return mapper.findNameByCode(code);
+    }
 }

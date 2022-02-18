@@ -19,4 +19,10 @@ public interface IDistrictService {
      */
     List<District> getDistrictList(String parent);
 
+    /**
+     * 获取省市区
+     * @param code 代码code
+     * @return
+     */
+    String getNameByCode(String code);
 }

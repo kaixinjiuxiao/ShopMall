@@ -61,6 +61,12 @@ public class BaseController {
         }else if(e instanceof AddressCountLimitException){
             result.setCode(4001);
             result.setMessage("用户收获地址超出限制");
+        }else if(e instanceof AddressNotFoundException){
+            result.setCode(4002);
+            result.setMessage("收货地址未找到");
+        }else if(e instanceof AccessDeniedException){
+            result.setCode(5001);
+            result.setMessage("非法数据访问");
         }
         return result;
     }

@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 //@RunWith(SpringRunner.class)注解是一个测试启动器，可以加载Springboot测试注解
@@ -56,5 +57,28 @@ public class AddressMapperTest {
     @Test
     public void getTotal(){
         System.out.println("数量=="+mapper.getAddressNums(6));
+    }
+
+    @Test
+    public void getAll(){
+        List<Address> list = mapper.getAllAddress(6);
+        for (Address address : list) {
+            System.out.println("数据=="+address.toString());
+        }
+    }
+
+    @Test
+    public void  getAddress(){
+        System.out.println("dizhi =="+mapper.getAddressById(5).toString());
+    }
+
+    @Test
+    public void setDefault(){
+        System.out.println(mapper.setDefault(5,"张三",new Date())==1?"成功":"失败");
+    }
+
+    @Test
+    public void setNoneDefault(){
+        System.out.println(mapper.setNoneDefault(6)>=1?"成功":"失败");
     }
 }

@@ -22,4 +22,6 @@ public class DistrictController extends BaseController{
         List<District> districtList = service.getDistrictList(parent);
         return new HttpResult<List<District>>(OK,"success",districtList);
     }
+
+
 }
